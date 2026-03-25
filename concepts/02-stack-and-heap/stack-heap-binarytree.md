@@ -1,6 +1,6 @@
 ### Concepts covered in this document
 
-- **Big O** >> _refer to `01-time-complexity`_
+- **Big O** _refer to [`01-time-complexity`](https://github.com/devYuraKim/from-logic-to-dsa/tree/main/concepts/01-time-complexity)_
 - ✅ **Stack concept**
 - ✅ **Heap/Binary Heap concept**
 - ✅ **PriorityQueue(Java)**
