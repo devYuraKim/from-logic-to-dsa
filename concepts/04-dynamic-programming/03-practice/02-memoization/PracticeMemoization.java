@@ -65,6 +65,8 @@ public class PracticeMemoization {
 
 }
 
+// TODO1: PracticeMemoization.java에서 line: 24, 33, 34, 37, 39, 50 정리 (특히 생각 꼬일 때랑, 누적 저장 안 되는 거, 루프 횟수 맞추기에서 오래 걸림).
+
 // 실수1. Loop: i <= n, not i =< n
 // 실수2. HashMap 선언 문법: Map<Integer, Integer> memo = new HashMap<>();
 // 실수3. HashMap 값 구하기: memo.put(key, value);, memo.get(key)
