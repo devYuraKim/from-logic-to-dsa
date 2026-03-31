@@ -1,6 +1,6 @@
 # Root Cause Analysis 01
 `PracticeMemoization.java`   
-`CorrectionSyntax.java`
+`CorrectionSyntaxMemoization.java`
 
 ## 1. Data Structure 선정
 
