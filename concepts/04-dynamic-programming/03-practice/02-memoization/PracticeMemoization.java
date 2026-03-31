@@ -66,6 +66,11 @@ public class PracticeMemoization {
 }
 
 // TODO1: PracticeMemoization.java에서 line: 24, 33, 34, 37, 39, 50 정리 (특히 생각 꼬일 때랑, 누적 저장 안 되는 거, 루프 횟수 맞추기에서 오래 걸림).
+// 24: Data Structure 어떤 기준으로 선정할 것인가?
+// 33: memo 누적 업데이트 위해서 변수 정의해야 하는 위치?
+// 34: 변수 정의 위치 설정 기준? - state, lifecycle, scope
+// 37: loop의 상태 변수 i와 목표 상수 n 혼동 (i == 0부터 시작해야 한다는 고정관념 버리기)
+// 39, 50: early return(guard clause or base case)
 
 // 실수1. Loop: i <= n, not i =< n
 // 실수2. HashMap 선언 문법: Map<Integer, Integer> memo = new HashMap<>();
