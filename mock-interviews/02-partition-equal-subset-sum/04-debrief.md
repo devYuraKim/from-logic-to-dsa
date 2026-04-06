@@ -170,11 +170,11 @@ Integer fib(Interger n) {     //3
 
 **DP 대표 5개** (이 순서로):
 
-1. Fibonacci
-2. Climbing Stairs
-3. Coin Change
+1. Fibonacci (LeetCode 509)
+2. Climbing Stairs (LeetCode 70)
+3. Coin Change (LeetCode 322)
 4. Subset Sum (LeetCode 416)
-5. Knapsack
+5. Knapsack (GeeksForGeeks 0 - 1 Knapsack Problem)
 
 ### 3. Modulo와 Early Return 습관화
 
