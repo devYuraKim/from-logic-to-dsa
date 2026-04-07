@@ -6,7 +6,7 @@ public class PracticeCoinChangeTry1 {
 
         System.out.println(getCoinChange([1,2,5], 11));
         System.out.println(getCoinChange([2], 3));
-        System.out.println(getCoinChange(1), 0));
+        System.out.println(getCoinChange([1], 0));
 
     }
 
