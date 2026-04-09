@@ -4,6 +4,36 @@ public class JumpGame2Try1 {
 
     }
 
+    public static int getMinJumps(int[] nums) {
+
+        // int[] nums = { 2, 3, 1, 1, 4 }
+
+        int n = nums.length;
+        int jumps = 0;
+
+
+        for(int i = 0; i < n; i++){
+            // at index i, check reachable index range
+            int maxIndex = i + nums[i];
+            // check the distance between the 'final index(n-1)' and maxIndex
+            // I'm sensing something is not right because I'm supposed to 'compare something' and then add 1 to 'jumps' but I'll just keep going
+            if(maxIndex >= n-1) {
+                jumps++;
+                // get out of the loop! how do I do that?
+                return jumps;
+            }
+
+            // if not calculate the distance between maxIndex and final index(n-1), and then choose the smallest one
+            // but then how would you know which is the smallest? right?
+
+            // 어디서 막혔는지 모르겠으니까 일단 여기까지 하고 try1은 마감
+        }
+
+
+        // if not possible
+        return -1;
+    }
+
 
 }
 
