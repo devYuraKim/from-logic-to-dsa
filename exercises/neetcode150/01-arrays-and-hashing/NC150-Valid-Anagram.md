@@ -1,4 +1,33 @@
-**HashMap**, **String**
+**Array**, **HashMap**, **String**
+
+### Array
+
+- Time complexity: $O(n)$
+- Space complexity: $O(1)$ (fixed 26 integers)
+- **dense**, **small range**, **predictable**: e.g. alphabet(lowercase/uppercase) `int[26]` or `int[52]`
+
+
+```java
+int[] count = new int[26];
+
+for(char c : s.toCharArray())
+count[c - 'a']++;
+
+        for(char c : t.toCharArray()) {
+count[c - 'a']--;
+
+        if(count[c - 'a'] < 0)
+        return false;
+        }
+
+        return true;
+```
+
+### HashMap
+
+- Time complexity: $O(n)$
+- Space complexity: $O(k)$ ($O(1) if alphabet is fixed)
+- - **sparse**, **large range**, **unpredictable**: e.g. all Unicode characters
 
 ```java
 public boolean isAnagram(String s, String t) {
