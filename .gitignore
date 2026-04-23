@@ -8,3 +8,5 @@
 # java
 *.class
 
+# private files
+*_private.*
