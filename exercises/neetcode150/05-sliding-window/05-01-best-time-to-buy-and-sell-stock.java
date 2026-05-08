@@ -1,19 +1,22 @@
-//6'23''
+//17'53''
 class Solution {
     public int maxProfit(int[] prices) {
 
-        int maxProfit = -1;
+        int pastLow = prices[0];
+        int maxProfit = 0;
 
-        for(int i=0; i<prices.length; i++){
-            for(int j=i+1; j<prices.length; j++){
-                int currentProfit = prices[j] - prices[i];
-                if(currentProfit > 0 && currentProfit>maxProfit){
-                    maxProfit = currentProfit;
-                }
+        for(int price: prices){
+            if(price < pastLow){
+                pastLow = price;
+            }
+
+            int profit = price - pastLow;
+            if( profit > maxProfit ){
+                maxProfit = profit;
             }
         }
 
-        return maxProfit < 0 ? 0 : maxProfit;
+        return maxProfit;
 
     }
 }
