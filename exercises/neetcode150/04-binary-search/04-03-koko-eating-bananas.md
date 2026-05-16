@@ -2,78 +2,77 @@
 ```java
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        
-        int max = piles[0];
 
-        for(int baCount : piles){
-            if(max < baCount){
-                max = baCount;
+        int minK = 1;
+        int maxK = 1;
+
+        for(int pile : piles){
+            if (pile > maxK){
+                maxK = pile;
             }
         }
 
+        while(minK <= maxK){
 
-        for(int k = 1; k <= max; k++){
-
+            int midK = (minK + maxK) / 2;
             int totalHours = 0;
 
-            for(int baCount : piles){
-
-                if(baCount % k != 0){
-                    totalHours += baCount/k + 1;
+            for(int pile : piles){
+                if(pile % midK != 0){
+                    totalHours += pile/midK + 1;
                 }else{
-                    totalHours += baCount/k;
+                    totalHours += pile/midK;
                 }
+            }
 
+            if(totalHours > h){
+                minK = midK + 1;
             }
 
             if(totalHours <= h){
-                return k;
+                maxK = midK - 1;
             }
+
         }
 
-        return -1;
+        return minK;
 
     }
 }
-
 ```
-
-| 항목 | Original Code       | Polished Code         |
-| :--- |:--------------------|:----------------------| 
-| **Max 탐색** | `if(max < baCount)` | `Math.max(max, pile)` | 
-| **시간 합산** | `int`               | `long`                | 
-| **올림 계산** | `if-else` 조건문       | `(pile + k - 1) / k`  |
-| **중도 중단** | 끝까지 계산함             | `h` 초과 시 즉시 `break`   | 
-*** 중도 중단 *** 조건 넣으면 TLE 안 떠!!!!!
 
 ### Polished Code
 ```java
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
 
-        int max = 0;
-        
+        int minK = 1;
+        int maxK = 1;
+
+        // 최댓값 탐색 (Math.max를 활용하여 가독성 향상)
         for (int pile : piles) {
-            max = Math.max(max, pile);
+            maxK = Math.max(maxK, pile);
         }
 
-        for (int k = 1; k <= max; k++) {
-            
-            long totalHours = 0;
+        while (minK <= maxK) {
+            // 정수 오버플로우 방지 및 매 루프마다 midK 갱신
+            int midK = minK + (maxK - minK) / 2;
+            int totalHours = 0;
 
             for (int pile : piles) {
-
-                totalHours += (pile + k - 1) / k;
-                
-                if (totalHours > h) break;
+                // 분기문(if-else)을 제거하고 정수 올림 공식을 적용하여 연산 단순화
+                totalHours += (pile + midK - 1) / midK;
             }
 
-            if (totalHours <= h) {
-                return k;
+            // 조건문을 if-else 구조로 변경하여 불필요한 두 번째 조건 검사 생략
+            if (totalHours > h) {
+                minK = midK + 1;
+            } else {
+                maxK = midK - 1;
             }
         }
 
-        return max;
+        return minK;
     }
 }
 ```
