@@ -1,3 +1,5 @@
+// Tue May 19 2026
+// 07'46''
 class Solution {
     public int maxSubArray(int[] nums) {
 
@@ -7,7 +9,7 @@ class Solution {
         for(int i=0; i<nums.length; i++){
             curSum += nums[i];
 
-            if(curSum > output){
+            if(curSum > output) {
                 output = curSum;
             }
 
@@ -19,10 +21,3 @@ class Solution {
         return output;
     }
 }
-
-// curSum = 0, output = -3
-// curSum = -3, output = -3
-
-//[-3]
-// curSum = 0, output = -3
-// curSum = -3 -> true -> curSum = 0, true -> output = 0;
