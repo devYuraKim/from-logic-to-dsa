@@ -1,6 +1,7 @@
-// Tue May 19 2026
+### My Original Code
+// Tue May 19 2026     
 // 13'51''
-
+```java
 class Solution {
     public boolean canJump(int[] nums) {
 
@@ -9,7 +10,7 @@ class Solution {
         for(int i=0; i<nums.length-1; i++){
 
             int possibleLimit = i+nums[i];
-
+            
             if(possibleLimit == i){
                 if(maxIndex == i){
                     return false;
@@ -26,15 +27,21 @@ class Solution {
 
     }
 }
+```
 
-// (0,1,2)
-// [0,2,3]
-// <0,3,5>
+### Polished Code
+```java
+class Solution {
+    public boolean canJump(int[] nums) {
+        
+        int maxIndex = 0;
 
-// (0,1,2,3,4)
-// [1,2,1,0,1]
-// <1,3,3,-,5>
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (i > maxIndex) return false;
+            maxIndex = Math.max(maxIndex, i + nums[i]);
+        }
 
-// (0,1,2,3,4)
-// [1,2,0,1,0]
-// <1,3,-,4,->
+        return maxIndex >= nums.length - 1;
+    }
+}
+```
