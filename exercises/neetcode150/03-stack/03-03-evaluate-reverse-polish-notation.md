@@ -1,38 +1,84 @@
-Tue May 12 2026
+Wed May 20 2026     
+8'59''
 
-### My First Attempt
-
-1. 괄호를 내가 직접 만들어야 하는 줄 알았음
-2. 반환 타입에는 맞지 않지만 '수식을 우선 String으로 만들어보자'가 목표였음
-
-=> 20분 고민 후, LLM + Solution 비디오 보다가 '숫자 2개에 연산자 1개'를 보고 바로 코드 짰음.
-
-
+### Original Code
 ```java
 class Solution {
     public int evalRPN(String[] tokens) {
         
-        int length = tokens.length();
+        Deque<Integer> numStack = new ArrayDeque<>();
 
-        StringBuilder sb = new StringBuilder();
+        for(String token : tokens){
+            if(token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/") && numStack.size()>=2){
+                Integer after = numStack.pop();
+                Integer before = numStack.pop();
 
-        ArrayDeque<Char> stack = new ArrayDeque<>();
+                Integer result = 0;
 
-        for(i=0; i<length; i++){
-            Char s = tokens.charAt(i);
-            if(s.isDigit){
-                stack.push(s);
-            }else if( s=='+' || s=='-' || s=='*' || s=='/' ){
-                while(!stack.isEmpty()){
-                    sb.append(stack.pop());
-                    sb.append(s);
-                    sb.append(stack.pop());
+                if(token.equals("+")){
+                    result = before+after;
                 }
+                if(token.equals("-")){
+                    result = before-after;
+                }
+                if(token.equals("*")){
+                    result = before*after;
+                }
+                if(token.equals("/")){
+                    result = before/after;
+                }
+
+                numStack.push(result);
+
+            }else{
+                numStack.push(Integer.parseInt(token));
             }
         }
 
-        return sb.toString();
+        return numStack.pop();
 
+    }
+}
+```
+
+### Polished Code (Structural Improvement)
+
+```java
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> numStack = new ArrayDeque<>();
+
+        for (String token : tokens) {
+
+            switch (token) {
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    int after = numStack.pop();
+                    int before = numStack.pop();
+                    int result = 0;
+
+                    if (token.equals("+")) {
+                        result = before + after;
+                    } else if (token.equals("-")) {
+                        result = before - after;
+                    } else if (token.equals("*")) {
+                        result = before * after;
+                    } else if (token.equals("/")) {
+                        result = before / after;
+                    }
+
+                    numStack.push(result);
+                    break;
+
+                default:
+                    numStack.push(Integer.parseInt(token));
+                    break;
+            }
+        }
+
+        return numStack.pop();
     }
 }
 ```

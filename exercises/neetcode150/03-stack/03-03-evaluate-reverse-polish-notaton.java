@@ -1,27 +1,30 @@
-// 20'' LLM + Solution Video
-// 07'08''
+// Wed May 20 2026
+// 8'59''
 class Solution {
-
     public int evalRPN(String[] tokens) {
 
-        ArrayDeque<Integer> numStack = new ArrayDeque<>();
+        Deque<Integer> numStack = new ArrayDeque<>();
 
         for(String token : tokens){
-            if(token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")){
+            if(token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/") && numStack.size()>=2){
+                Integer after = numStack.pop();
+                Integer before = numStack.pop();
 
-                Integer second = numStack.pop();
-                Integer first = numStack.pop();
+                Integer result = 0;
 
-                Integer result;
                 if(token.equals("+")){
-                    result = first + second;
-                }else if (token.equals("*")){
-                    result = first * second;
-                }else if (token.equals("-")){
-                    result = first - second;
-                }else{
-                    result = first / second;
+                    result = before+after;
                 }
+                if(token.equals("-")){
+                    result = before-after;
+                }
+                if(token.equals("*")){
+                    result = before*after;
+                }
+                if(token.equals("/")){
+                    result = before/after;
+                }
+
                 numStack.push(result);
 
             }else{
