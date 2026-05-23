@@ -1,42 +1,45 @@
-// Sat May 16 2026
-// 10'32''
+// Sat May 23 2026
+// 14'03''
+// while(minRate <= maxRate) 했다가 TLE
 
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
 
-        int minK = 1;
-        int maxK = 1;
+        int minRate = 1;
+        int maxRate = 1;
 
-        for(int pile : piles){
-            if (pile > maxK){
-                maxK = pile;
+        for(int pile: piles){
+            if(pile>maxRate){
+                maxRate = pile;
             }
+            // 이거 Math.max(maxRate, pile); ?
+            // 아니, math = Math.max(maxRate, pile)로 재할당 필요
+            //maxRate = Math.max(maxRate, pile);
         }
 
-        while(minK <= maxK){
+        while(minRate < maxRate){
+            int totTime = 0;
+            int midRate = (minRate+maxRate)/2;
 
-            int midK = (minK + maxK) / 2;
-            int totalHours = 0;
-
-            for(int pile : piles){
-                if(pile % midK != 0){
-                    totalHours += pile/midK + 1;
+            for(int pile: piles){
+                if(pile % midRate != 0){
+                    totTime += pile/midRate + 1;
                 }else{
-                    totalHours += pile/midK;
+                    totTime += pile/midRate;
                 }
+                // 이거 totTime += (pile+midRate-1)/midRate; ?
+                // 이 공식 맞음
+                // totTime += (pile+midRate-1)/midRate;
             }
 
-            if(totalHours > h){
-                minK = midK + 1;
+            if(totTime > h){
+                minRate = midRate+1;
+            }else{
+                maxRate = midRate;
             }
-
-            if(totalHours <= h){
-                maxK = midK - 1;
-            }
-
         }
 
-        return minK;
+        return minRate;
 
     }
 }
