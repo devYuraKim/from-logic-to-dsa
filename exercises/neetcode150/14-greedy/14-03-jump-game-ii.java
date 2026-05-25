@@ -1,22 +1,24 @@
-// Wed May 20
-// 51' 06'' + LLM
+// Mon May 25 2026
+// over an hour and a half + LLM
 class Solution {
     public int jump(int[] nums) {
 
-        int jumpCount=0;
-        int curEnd=0;
-        int curMax=0;
+        int localMax = 0;
+        int globalMax = 0;
+        int jumps = 0;
 
         for(int i=0; i<nums.length-1; i++){
-            if(curMax < i+nums[i]){
-                curMax = i+nums[i];
+            if(globalMax < i+nums[i]){
+                globalMax = i+nums[i];
             }
-
-            if(curEnd==i){
-                jumpCount++;
-                curEnd = curMax;
+            // 이 문제 조건에서는 상관 없지만 엄밀히는 localMax==i 해야 한다.
+            if(localMax <= i){
+                jumps++;
+                localMax = globalMax;
             }
         }
-        return jumpCount;
+
+        return jumps;
+
     }
 }
