@@ -1,30 +1,26 @@
-// Sun May 17 2026
-// 8'48''
+// Wed May 27 2026
+// 갑자기 머리가 하얘져서 손도 못 댐...
 class Solution {
     public int maxProfit(int[] prices) {
 
-        int output = 0;
-        int pastLow = prices[0];
+        int output=0; //maxProfit
 
-        for(int price : prices){
+        // 지금까지 내가 본 최저가격은(buying point) 얼마인가?
+        int lowest=prices[0];
 
-            if(pastLow > price){
-                pastLow = price;
+        for(int price: prices){
+
+            if(price < lowest){
+                lowest = price;
             }
 
-            if(price - pastLow > output){
-                output = price - pastLow;
+            if(price-lowest > output){
+                output = price - lowest;
             }
 
         }
+
         return output;
+
     }
 }
-
-// [10,1,5,6,7,1]
-// i==0,
-// i==1, -10    +1
-// i==2, -10,-1    +5
-// i==3, -10,-1,-5    +6
-// i==4, -10,-1,-5,-6,    +7
-// i==5, -10,-1,-5,-6,-7  +1
