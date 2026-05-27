@@ -2,38 +2,40 @@
 // 18'51'' + LLM
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-
-        int left=0;
-        int right=0;
-
-        int output=0; //maxLength
+        int left = 0;
 
         Set<Character> charSet = new HashSet<>();
+        int output = 0;
 
-        while(left<=right && right < s.length()){
+        for(int right=0; right<s.length(); right++){
+            char rc = s.charAt(right);
+            char lc = s.charAt(left);
 
-            if(charSet.add(s.charAt(right))){
-                right++;
+            if(charSet.add(rc)){
+                output = Math.max(output, right-left+1);
             }else{
-                int newLeft = s.indexOf(s.charAt(right), left)+1;
-                for(int i=left; i<newLeft; i++){
-                    charSet.remove(s.charAt(i));
+                while(lc!=rc){
+                    charSet.remove(lc);
+                    left++;
+                    //아래 한 줄 추가
+                    lc = s.charAt(left);
                 }
-                left = newLeft;
-                charSet.add(s.charAt(right));
-                right++;
+                //아래 세 줄 추가
+                charSet.remove(lc);
+                left++;
+                charSet.add(rc);
             }
-
-            output = Math.max(output, right-left);
-
         }
 
         return output;
-
     }
 }
 
-// abcdeccdba
-// abcde
-//    dec
-//       cdba
+// for (int right = 0; right < s.length(); right++) {
+//     while (set.contains(s.charAt(right))) {
+//         set.remove(s.charAt(left));
+//         left++;
+//     }
+//     set.add(s.charAt(right));
+//     output = Math.max(output, right - left + 1);
+// }
