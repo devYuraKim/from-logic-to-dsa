@@ -1,24 +1,32 @@
-// Mon May 25 2026
-// over an hour and a half + LLM
+// Wed May 27 2026
+// 11'29''
 class Solution {
     public int jump(int[] nums) {
 
-        int localMax = 0;
-        int globalMax = 0;
+        int maxLimit = 0;
+        int currentLimit = 0;
         int jumps = 0;
 
         for(int i=0; i<nums.length-1; i++){
-            if(globalMax < i+nums[i]){
-                globalMax = i+nums[i];
+
+            if(maxLimit < i+nums[i]){
+                maxLimit = i+nums[i];
             }
-            // 이 문제 조건에서는 상관 없지만 엄밀히는 localMax==i 해야 한다.
-            if(localMax <= i){
+
+            if(i == currentLimit){
                 jumps++;
-                localMax = globalMax;
+                currentLimit = maxLimit;
             }
+
         }
 
         return jumps;
 
     }
 }
+
+// i=0, maxLimit=2, currentLimit=2
+// i=1, maxLimit=5, currentLimit=2
+// i=2, maxLimit=5, currnetLimit=i jump=1, currentLimit=maxLimit=5
+// i=3, maxLimit=5, currentLimit=5
+// i=4, maxLimit=5, currentLimit=5
