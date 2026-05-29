@@ -1,20 +1,21 @@
-// Thu May 28 2026
-// 13'57''
+// Sat May 30 2026
+// 7'50''
 class Solution {
     public int findMin(int[] nums) {
 
         int left = 0;
         int right = nums.length-1;
 
-        while(left<right){
+        //check
+        while (left < right){
             int mid = left + (right-left)/2;
-            //미친... 이걸 이렇게 써놨으니까 안 됐지...
-            //if(nums[mid]<right){
-            if(nums[mid] < nums[right]){
+
+            if(nums[mid] < nums[right]){ //mid부터 nums까지는 오름차순으로 정렬, 가장 작은 값은 mid이므로 right=mid로 mid 포함해서 확인
                 right = mid;
-            }else{ // nums[mid] >= right
+            }else{ //nums[mid] >= nums[right] 도중에 푹 꺼지는 곳이 있음, mid는 가장 작은 값이 아니므로 left=mid+1로 mid 제외해서 확인
                 left = mid+1;
             }
+
         }
 
         return nums[left];
@@ -22,16 +23,17 @@ class Solution {
     }
 }
 
-// left=0, right=5, mid=2
-// nums[mid2]=5 > nums[right5]=2, left=mid+1=3
-// left=3, right=5, mid=4
-// nums[mid4]=1, nums[right5]=2, right=mid=4
-// left=3, right=4, mid=3
-// nums[mid3]=6, nums[right]=1, left=mid+1
-// left=4, right=4, mid=4 (left<right)
-
+// [4,5,6,7]
 // left=0, right=3, mid=1
-// nums[mid1]=5 < nums[right3]=7, right=mid=1
+// nums[mid1]=5 nums[right]=7 right=mid=1
 // left=0, right=1, mid=0
-// nums[mid0]=4 < nums[right]=5, right=mid=0
-// left=0, right=0, mid=0
+// nums[mid0]=4, nums[right1]=5 right=mid=0
+// left == mid라서 while break
+
+// [4,5,0,1,2,3]
+// left=0, right=5, mid=2
+// nums[mid2]=0, nums[mid3]=3, right=mid=2
+// left=0, right=2, mid=1
+// nums[mid1]=5, nums[right2]=0, left=mid+1=2
+// left=2, right=2, mid=1
+// left == mid라서 while break
