@@ -15,9 +15,7 @@ class Solution {
                 return mid;
             }
 
-            // ####오류2####
-            if(nums[mid] <= nums[right]){
-                //if(nums[mid] < nums[right]){ //mid부터 right까지 ascending order
+            if(nums[mid] < nums[right]){ //mid부터 right까지 ascending order
                 // target은 mid보다 작거나, right보다 큰 경우 -> mid부터 right에 존재하지 않음 -> mid-right 날림 = right=mid-1
                 if(target < nums[mid] || target > nums[right]){
                     right = mid-1;
