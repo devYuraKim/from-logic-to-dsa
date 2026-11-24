@@ -1,34 +1,39 @@
-//Fri Apr 24
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
+//Tue Nov 24 2026
+//16'24''
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
 
-        Map<String, List<String>> wordMap = new HashMap<>();
-        //Map<String, String> wordMap = new HashMap<>();
+        //strs array에서 단어를 꺼냄
+        //아까 한 것처럼 배열에 알파벳 개수를 저장
+        //그 다음 분류를 어떻게 할까?
+        //HashMap에 key와 value로 두면 어떨까?
+        //key가 알파벳개수배열, value가 원래 단어
+        //그래서 최종 결과는 각 key에 있는 value를 array로 출력
 
-        for(int i = 0; i < strs.length; i++){
-            int[] characterCount = new int[26];
-            //char[] characterArray = new char[26];
-            for(int j = 0; j < strs[i].length(); j++){
-                characterCount[strs[i].charAt(j)-'a']++;
-                //characterArray[strs[i].charAt(j)-'a'] = strs[i].charAt(j);
+        HashMap<String, List<String>> output = new HashMap<>();
+
+        for(int i=0; i<strs.length; i++){
+            String word = strs[i];
+            int[] countArray = new int[26];
+            for(int j=0; j<word.length(); j++){
+                countArray[word.charAt(j)-'a']++;
             }
-            String wordKey = Arrays.toString(characterCount);
-            if(wordMap.containsKey(wordKey)){
-                //if(wordMap.hasKey(wordKey)){
-                wordMap.get(wordKey).add(strs[i]);
-                //wordMap.add(strs[i]);
-            }else{
-                wordMap.put(wordKey, new ArrayList<>(Arrays.asList(strs[i])));
-                //wordMap.add(wordKey, strs[i]);
+            String key = Arrays.toString(countArray);
+
+            if (!output.containsKey(key)) {
+                output.put(key, new ArrayList<>());
             }
+
+            output.get(key).add(word);
         }
 
-        return new ArrayList<>(wordMap.values());
-        //return wordMap;
+
+        return new ArrayList<>(output.values());
 
     }
 }
-
-// HashMap을 만들어서
-// key를 알파벳+개수 조합으로 만들고, value를 단어로 넣는다
-
